@@ -1,0 +1,140 @@
+﻿@model foneMeService.Models.ContactFormViewModel
+@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <!-- font awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <!-- google font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <link rel="shortcut icon" href="~/Assets/img/Logo 1.png">
+
+    <!-- country selector -->
+    <link rel="stylesheet" href="~/Assets/style/countrySelect.css">
+
+    <!-- country code -->
+    <link rel="stylesheet" href="~/Assets/style/intlTelInput.css">
+
+
+
+    <!-- style css -->
+    <link href="~/Assets/style/style.css" rel="stylesheet" />
+
+    <title>FoneMe</title>
+</head>
+<body style="overflow-y: hidden !important;">
+
+
+    <!-- navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container">
+            <a class="navbar-brand" href="https://fone.me/l">
+                <img src="~/Assets/img/LOGO 4.png" class="img-fluid" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.foneme.org/privacy">Privacy</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="https://www.foneme.org/About">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark mx-2" href="https://www.foneme.org/blog">Blog</a>
+                    </li>
+                </ul>
+
+            </div>
+        </div>
+    </nav>
+    <!-- navbar -->
+    <!-- message-body -->
+    <section class="message-body py-4">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3"></div>
+                <div class="col-md-6">
+                    <div class="message-box">
+                        <div class="card">
+                            <div class="card-body">
+                                @using (Html.BeginForm("SendMessage", "Home", null, FormMethod.Post, new { @class = "" }))
+                                {
+                                    @Html.AntiForgeryToken()
+                                    @Html.HiddenFor(model => model.ReceieverUserId)
+                                    <input type="text" class="form-control my-3" placeholder="FullName" name="FullName" id="" required>
+
+                                    <input id="code" name="code" class="form-control my-3 w-100" type="hidden">
+
+                                    <input type="tel" id="tel" class="form-control my-3 w-100" placeholder="Mobile Number" name="SenderMobileNumber" required>
+                                    <textarea name="Message" class="form-control my-3" placeholder="Message" id="" cols="30" rows="5" required></textarea>
+                                    <!-- <input type="tel" id="tel"> -->
+
+                                    if (ViewBag.data != "")
+                                    {
+                                        <input type="text" class="form-control my-3 ps-5" placeholder="@ViewBag.data" readonly="readonly">
+                                    }
+                                    <button class="btn btn-primary w-100 py-3 text-uppercase my-3">
+                                        Submit
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+        </div>
+    </section>
+    <!-- message-body -->
+    <!-- jquery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="~/Assets/jquery/jquery.min.js"></script>
+    <!-- bootstrap js -->
+    <script src="~/Assets/scripts/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/js/bootstrap.min.js"></script>
+
+    <!-- countryselect js -->
+    <script src="~/Assets/scripts/countrySelect.js"></script>
+
+    <!-- country code -->
+    <script src="~/Assets/scripts/intlTelInput-jquery.min.js"></script>
+    <script src="~/Assets/scripts/script.js"></script>
+
+    <script>
+        $(document).ready(function () {
+              $('#code').val("+"+$("#tel").intlTelInput("getSelectedCountryData").dialCode);
+
+        });
+
+        var iti = $("#tel").intlTelInput();
+        $('#tel').on('countrychange', function (e) {
+           // console.log($("+"+"#tel").intlTelInput("getSelectedCountryData").dialCode);
+            $('#code').val("+"+$("#tel").intlTelInput("getSelectedCountryData").dialCode);
+        });
+
+    </script>
+</body>
+</html>
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+
+}

@@ -1,0 +1,15 @@
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\foneMe.SL.dll.config
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\foneMe.SL.dll
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\foneMe.SL.pdb
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\EntityFramework.dll
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\EntityFramework.SqlServer.dll
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\foneMe.ViewModels.dll
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\foneMe.ViewModels.pdb
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\foneMe.ViewModels.dll.config
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\EntityFramework.xml
+C:\inetpub\Upwork_Project\foneMe.SL\bin\Debug\EntityFramework.SqlServer.xml
+C:\inetpub\Upwork_Project\foneMe.SL\obj\Debug\foneMe.SL.csproj.AssemblyReference.cache
+C:\inetpub\Upwork_Project\foneMe.SL\obj\Debug\foneMe.SL.csproj.CoreCompileInputs.cache
+C:\inetpub\Upwork_Project\foneMe.SL\obj\Debug\foneMe.SL.csproj.CopyComplete
+C:\inetpub\Upwork_Project\foneMe.SL\obj\Debug\foneMe.SL.dll
+C:\inetpub\Upwork_Project\foneMe.SL\obj\Debug\foneMe.SL.pdb

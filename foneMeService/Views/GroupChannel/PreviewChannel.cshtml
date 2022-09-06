@@ -1,0 +1,286 @@
+﻿@model foneMe.ViewModels.Model.GroupDetailsViewModel
+@{
+    Layout = null;
+    var groupId = Model?.GroupID ?? ViewBag.ChannelName;
+}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="~/logo.ico">
+    <link rel="shortcut icon" href="~/logo.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet" type="text/css" />
+    <link href="~/Assets/theme/css/widget-frame.css" rel="stylesheet" media="screen" />
+    <link href="~/Assets/theme/css/telegram-web.css" rel="stylesheet" media="screen" />
+
+</head>
+
+<body class="widget_frame_base tgme_webpreview emoji_image thin_box_shadow tme_mode twallpaper">
+    <div class="tgme_background_wrap">
+        <canvas id="tgme_background" class="tgme_background" width="50" height="50"
+                data-colors="dbddbb,6ba587,d5d88d,88b884"></canvas>
+        <div class="tgme_background_pattern"></div>
+    </div>
+    <header class="tgme_header">
+        <div class="tgme_container">
+            <div class="tgme_header_search">
+                <a href="https://play.google.com/store/apps/details?id=com.fone.me">
+                    <img style="height:34px" src="/Assets/img/playstore.png" class="w-25 pl" alt="">
+                </a>
+                <a href="https://apps.apple.com/us/app/fone-call-anyone-anywhere/id1496675612?ls=1">
+                    <img style="height:34px" src="/Assets/img/appstore.png" class="w-25 pl" alt="">
+                </a>
+            </div>
+            <div class="tgme_header_info">
+                <a class="tgme_header_link" href="/">
+                    <img style="height:34px" src="https://fone.me/Assets/img/LOGO%201-02-05-01.jpg" class="img-fluid" alt="">
+                </a>
+            </div>
+
+            <div class="tgme_header_right_column">
+                <section class="tgme_right_column">
+                    <div class="tgme_channel_info">
+                        <div class="tgme_channel_info_header">
+                            <i class="tgme_page_photo_image bgcolor2">
+                                <img id="group-cover-photo" />
+                            </i>
+                            <div class="tgme_channel_info_header_title_wrap">
+                                <div class="tgme_channel_info_header_title">
+                                    <span dir="auto" id="group-name"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tgme_channel_info_counters">
+                            <div class="tgme_channel_info_counter">
+                                <span class="counter_value" id="group-member-count"></span>
+                                <span class="counter_type">members</span>
+                            </div>
+                        </div>
+                        <div class="tgme_channel_info_description" id="group-description">
+                        </div>
+                        <a class="tgme_channel_download_telegram" href="https://foneme.app.link/GroupChannel?GroupID=@groupId">
+                            Open in App
+                        </a>
+                    </div>
+                </section>
+            </div>
+        </div>
+    </header>
+
+    <div class="tgme_main" id='group-chat-error' style="display: none;">
+        <div class="tgme_container">
+            <section class="tgme_channel_history js-message_history">
+                <div class="tgme_widget_message_wrap js-widget_message_wrap">
+                    Nothing to see here.
+                </div>
+            </section>
+        </div>
+    </div>
+
+    <main class="tgme_main">
+        <div class="tgme_container">
+            <section class="tgme_channel_history js-message_history" id="group-messages"></section>
+        </div>
+    </main>
+
+
+    <script id="group-message-template" type="text/x-handlebars-template">
+        {{#each .}}
+        <div class="tgme_widget_message_wrap js-widget_message_wrap">
+            <div class="tgme_widget_message js-widget_message">
+                <div class="tgme_widget_message_user">
+                    <i class="tgme_widget_message_user_photo bgcolor2">
+                        <a data-user-id="{{_sender.userId}}" onclick="getUserNameAndRedirectToProfile(this.attributes['data-user-id'].value)" href="javascript:;">
+                            <img src="{{_sender.plainProfileUrl}}" />
+                        </a>
+                    </i>
+                </div>
+                <div class="tgme_widget_message_bubble">
+                    <i class="tgme_widget_message_bubble_tail">
+                        <svg class="bubble_icon" width="9px" height="20px" viewBox="0 0 9 20">
+                            <g fill="none">
+                                <path class="background" fill="#ffffff"
+                                      d="M8,1 L9,1 L9,20 L8,20 L8,18 C7.807,15.161 7.124,12.233 5.950,9.218 C5.046,6.893 3.504,4.733 1.325,2.738 L1.325,2.738 C0.917,2.365 0.89,1.732 1.263,1.325 C1.452,1.118 1.72,1 2,1 L8,1 Z">
+                                </path>
+                                <path class="border_1x" fill="#d7e3ec"
+                                      d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0 L9,0 L9,20 L7,20 L7,20 L7.002,18.068 C6.816,15.333 6.156,12.504 5.018,9.58 C4.172,7.406 2.72,5.371 0.649,3.475 C-0.165,2.729 -0.221,1.464 0.525,0.649 C0.904,0.236 1.439,0 2,0 Z">
+                                </path>
+                                <path class="border_2x"
+                                      d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.5 L9,0.5 L9,20 L7.5,20 L7.5,20 L7.501,18.034 C7.312,15.247 6.64,12.369 5.484,9.399 C4.609,7.15 3.112,5.052 0.987,3.106 C0.376,2.547 0.334,1.598 0.894,0.987 C1.178,0.677 1.579,0.5 2,0.5 Z">
+                                </path>
+                                <path class="border_3x"
+                                      d="M9,1 L2,1 C1.72,1 1.452,1.118 1.263,1.325 C0.89,1.732 0.917,2.365 1.325,2.738 C3.504,4.733 5.046,6.893 5.95,9.218 C7.124,12.233 7.807,15.161 8,18 L8,20 L9,20 L9,1 Z M2,0.667 L9,0.667 L9,20 L7.667,20 L7.667,20 L7.668,18.023 C7.477,15.218 6.802,12.324 5.64,9.338 C4.755,7.064 3.243,4.946 1.1,2.983 C0.557,2.486 0.52,1.643 1.017,1.1 C1.269,0.824 1.626,0.667 2,0.667 Z">
+                                </path>
+                            </g>
+                        </svg>
+                    </i>
+                    <div class="tgme_widget_message_author accent_color">
+                        <span class="tgme_widget_message_owner_name">
+                            {{_sender.nickname}}
+                        </span>
+                    </div>
+
+                    {{#if isImage}}
+                    <a class="tgme_widget_message_photo_wrap"
+                       style="width: 500px; background-image: url('{{plainUrl}}') ">
+                        <div class="tgme_widget_message_photo" style="padding-top:63.125%"></div>
+                    </a>
+                    {{/if}}
+
+                    {{#if isVideo}}
+                    <video controls="controls" src="{{plainUrl}}"></video>
+                    {{/if}}
+
+                    {{#if ogMetaData}}
+                    {{#if ogMetaData.defaultImage}}
+                    <a class="tgme_widget_message_photo_wrap" href="{{ogMetaData.url}}"
+                       style="width:{{ogMetaData.defaultImage.width}};background-image: url('{{ogMetaData.defaultImage.url}}')" target="_blank">
+                        <div class="tgme_widget_message_photo" style="padding-top:63.125%"></div>
+                    </a>
+                    {{/if}}
+                    <a href="href=" {{ogMetaData.url}} " target="_blank">
+                        {{ogMetaData.title}}
+                    </a><br />{{ogMetaData.description}}
+                    {{else}}
+                    {{breaklines message}}
+                    {{/if}}
+
+                    <div class="tgme_widget_message_footer compact js-message_footer">
+                        <div class="tgme_widget_message_info short js-message_info">
+                            <span class="tgme_widget_message_meta">
+                                <span class="tgme_widget_message_date">
+                                    {{date createdAt}}
+                                </span>
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </script>
+
+    <script src="~/Assets/jquery/jquery.min.js"></script>
+    <script src="~/Assets/theme/js/tgwallpaper.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="~/Assets/sendbird/SendBird.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/handlebars@latest/dist/handlebars.js"></script>
+
+    <script>
+        var tme_bg = document.getElementById('tgme_background');
+        if (tme_bg) {
+            TWallpaper.init(tme_bg);
+            TWallpaper.animate(true);
+            window.onfocus = function () {
+                TWallpaper.update();
+            };
+        }
+    </script>
+    <script>
+        Handlebars.registerHelper('date',
+            function(createdAt) {
+                var date = new Date(createdAt);
+                return date.getHours() + ':' + date.getMinutes()
+            });
+        Handlebars.registerHelper('breaklines', function(text) {
+            text = Handlebars.Utils.escapeExpression(text);
+            text = text.replace(/(\r\n|\n|\r)/gm, '<br>');
+            return new Handlebars.SafeString(text);
+        });
+        $(document).ready(function () {
+            if(isOnMobileDevice()){
+                window.location.replace("https://foneme.app.link/GroupChannel?GroupID=@groupId");
+                return;
+            }
+            getChannelInfo();
+        });
+
+        function getUserNameAndRedirectToProfile(phoneNumber) {
+            $.get(`${location.origin}/api/account/v1/CICN/${phoneNumber.replace("+", "")}`).done(res => {
+                window.open(`${location.origin}/${res}`, "_blank");
+            });
+        }
+
+        function getChannelInfo(){
+            var sb = new SendBird({ appId: '5A3F0F54-1ED8-43D0-A352-627AFE220EC4', localCacheEnabled: true });
+            sb.connect(Math.random.toString(), function (user, error) {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+
+                sb.OpenChannel.getChannel("@groupId", function(openChannel, error) {
+                    if (error) {
+                        $('#group-chat-root').hide();
+                        $('#group-chat-error').show();
+                        console.error(error);
+                        return;
+                    }
+
+                    $('#group-chat-root').show();
+                    displayChannelInfo(openChannel);
+                    handleChannelMessages(openChannel);
+                });
+            });
+        }
+
+        function handleChannelMessages(openChannel) {
+            var messageQuery = openChannel.createPreviousMessageListQuery();
+            messageQuery.limit = 10;
+            messageQuery.reverse = true;
+
+            // Retrieving previous messages.
+            messageQuery.load(function(messageList, error) {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+
+                var messages = messageList.map(function (message) {
+                    var cloneMessage = Object.assign({}, message);
+                    cloneMessage.isImage = message.isFileMessage() && isImage(message.type);
+                    cloneMessage.isVideo = message.isFileMessage() && isVideo(message.type);
+
+                    return cloneMessage;
+                }).reverse();
+
+                var template = Handlebars.compile($('#group-message-template').html());
+                var html = template(messages);
+                $('#group-messages').append(html);
+            });
+        }
+
+        function displayChannelInfo(openChannel) {
+            var channelName = openChannel.name;
+            var groupPhoto = openChannel.coverUrl;
+            var memberCount = openChannel.participantCount;
+            var description = openChannel.data;
+
+            $('#group-name').text(channelName);
+            $('#group-cover-photo').attr('src', groupPhoto);
+            $('#group-member-count').text(memberCount);
+            $('#group-description').text(description);
+        }
+
+        function isImage(fileType) {
+            return /^image\/.+$/.test(fileType);
+        }
+
+        function isVideo(fileType) {
+            return /^video\/.+$/.test(fileType);
+        }
+
+        function isOnMobileDevice(){
+            return navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i);
+        }
+    </script>
+</body>
+</html>
+

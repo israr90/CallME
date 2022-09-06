@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="264042add3054af4883999eb714642b0" Name="Diagram1">
+        <EntityTypeShape EntityType="foneMeModel.Audience" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="foneMeModel.CallConnection" Width="1.5" PointX="8.25" PointY="1.375" />
+        <EntityTypeShape EntityType="foneMeModel.Claim" Width="1.5" PointX="5.25" PointY="6.625" />
+        <EntityTypeShape EntityType="foneMeModel.Contact" Width="1.5" PointX="8.25" PointY="8.625" />
+        <EntityTypeShape EntityType="foneMeModel.ExternalLogin" Width="1.5" PointX="5.25" PointY="22.125" />
+        <EntityTypeShape EntityType="foneMeModel.LocalContact" Width="1.5" PointX="5.25" PointY="13.625" />
+        <EntityTypeShape EntityType="foneMeModel.Profile" Width="1.5" PointX="6" PointY="1.75" />
+        <EntityTypeShape EntityType="foneMeModel.ProfileType" Width="1.5" PointX="3.75" PointY="2.375" />
+        <EntityTypeShape EntityType="foneMeModel.ProjectFile" Width="1.5" PointX="10.75" PointY="0.75" />
+        <EntityTypeShape EntityType="foneMeModel.Role" Width="1.5" PointX="0.75" PointY="9.5" />
+        <EntityTypeShape EntityType="foneMeModel.User" Width="1.5" PointX="3" PointY="6.5" />
+        <AssociationConnector Association="foneMeModel.FK_CallConnection_Profiles" />
+        <AssociationConnector Association="foneMeModel.FK_CallConnection_Profiles1" />
+        <AssociationConnector Association="foneMeModel.FK_CallConnection_Profiles2" />
+        <AssociationConnector Association="foneMeModel.FK_CallConnection_Users" />
+        <AssociationConnector Association="foneMeModel.FK_CallConnection_Users1" />
+        <AssociationConnector Association="foneMeModel.FK_Claim_Users" />
+        <AssociationConnector Association="foneMeModel.FK_Contacts_Profiles" />
+        <AssociationConnector Association="foneMeModel.FK_Contacts_Profiles1" />
+        <AssociationConnector Association="foneMeModel.FK_Contacts_Users" />
+        <AssociationConnector Association="foneMeModel.FK_ExternalLogin_Users" />
+        <AssociationConnector Association="foneMeModel.FK_LocalContact_Users1" />
+        <AssociationConnector Association="foneMeModel.FK_LocalContact_Users2" />
+        <AssociationConnector Association="foneMeModel.FK_Profile_ProfileType" />
+        <AssociationConnector Association="foneMeModel.UserRole" />
+        <EntityTypeShape EntityType="foneMeModel.sysdiagram" Width="1.5" PointX="0.75" PointY="3.75" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

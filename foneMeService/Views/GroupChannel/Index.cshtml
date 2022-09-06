@@ -1,0 +1,129 @@
+﻿@model foneMe.ViewModels.Model.GroupDetailsViewModel
+@{
+    Layout = null;
+    var groupId = Model?.GroupID ?? ViewBag.ChannelName;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>FoneMe</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" href="~/logo.ico">
+    <link rel="shortcut icon" href="~/logo.ico">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,700" rel="stylesheet" type="text/css">
+    <link href="~/Assets/theme/css/bootstrap.min.css" rel="stylesheet">
+    <link href="~/Assets/theme/css/style.css" rel="stylesheet" media="screen">
+</head>
+<body>
+    <div class="tgme_background_wrap">
+        <canvas id="tgme_background" class="tgme_background default" width="50" height="50" data-colors="dbddbb,6ba587,d5d88d,88b884"></canvas>
+        <div class="tgme_background_pattern default"></div>
+    </div>
+    <div class="tgme_page_wrap">
+        <div class="tgme_head_wrap">
+            <div class="tgme_head">
+                <a href="/" class="tgme_head_brand">
+                    <img style="height:34px" src="https://fone.me/Assets/img/LOGO%201-02-05-01.jpg" class="img-fluid" alt="">
+                </a>
+                <div class="tgme_head">
+                    <a href="https://play.google.com/store/apps/details?id=com.fone.me">
+                        <img style="height:34px" src="/Assets/img/playstore.png" class="w-25 pl" alt="">
+                    </a>
+                    <a href="https://apps.apple.com/us/app/fone-call-anyone-anywhere/id1496675612?ls=1">
+                        <img style="height:34px" src="/Assets/img/appstore.png" class="w-25 pl" alt="">
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="tgme_body_wrap">
+            <div class="tgme_page" id='group-chat-root' style="display:none;">
+                <div class="tgme_page_photo">
+                    <img id="group-cover-photo" class="tgme_page_photo_image">
+                </div>
+                <div class="tgme_page_title" dir="auto">
+                    <span id="group-name" dir="auto"></span>
+                </div>
+                <div class="tgme_page_extra">
+                    <span id="group-member-count"></span> member(s) online
+                </div>
+                <div class="tgme_page_description" dir="auto" id="group-description"></div>
+                <div class="tgme_page_action">
+                    <a class="tgme_action_button_new shine" href="https://foneme.app.link/GroupChannel?GroupID=@groupId">View in App</a>
+                </div>
+                <div class="tgme_page_context_link_wrap">
+                    <a class="tgme_page_context_link" href="@Url.Action("PreviewChannel", "GroupChannel", new { name = ViewBag.ChannelName})">Preview channel</a>
+                </div>
+                <div class="tgme_page_additional"></div>
+            </div>
+            <div class="tgme_page" id='group-chat-error' style="display:none;">
+                <div class="tgme_page_title" dir="auto">
+                    Nothing to see here.
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="~/Assets/theme/js/tgwallpaper.min.js"></script>
+    <script src="~/Assets/jquery/jquery.min.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <script src="~/Assets/sendbird/SendBird.min.js"></script>
+    <script>
+        var tme_bg = document.getElementById('tgme_background');
+        if (tme_bg) {
+            TWallpaper.init(tme_bg);
+            TWallpaper.animate(true);
+            window.onfocus = function () {
+                TWallpaper.update();
+            };
+        }
+    </script>
+    <script>
+        $(document).ready(function () {
+            if(isOnMobileDevice()){
+                window.location.replace("https://foneme.app.link/GroupChannel?GroupID=@groupId");
+                return;
+            }
+            getChannelInfo();
+        });
+
+        function getChannelInfo(){
+            var sb = new SendBird({ appId: '5A3F0F54-1ED8-43D0-A352-627AFE220EC4', localCacheEnabled: true });
+            sb.connect(Math.random.toString(), function (user, error) {
+                if (error) {
+                    console.error(error);
+                    return;
+                }
+
+                sb.OpenChannel.getChannel("@groupId", function(openChannel, error) {
+                    if (error) {
+                        $('#group-chat-root').hide();
+                        $('#group-chat-error').show();
+                        console.error(error);
+                        return;
+                    }
+                    $('#group-chat-root').show();
+                    var channelName = openChannel.name;
+                    var groupPhoto = openChannel.coverUrl;
+                    var memberCount = openChannel.participantCount;
+                    var description = openChannel.data;
+
+                    $('#group-name').text(channelName);
+                    $('#group-cover-photo').attr('src', groupPhoto);
+                    $('#group-member-count').text(memberCount);
+                    $('#group-description').text(description);
+                });
+
+            });
+        }
+
+        function isOnMobileDevice(){
+            return navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i);
+        }
+    </script>
+</html>

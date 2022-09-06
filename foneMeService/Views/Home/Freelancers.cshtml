@@ -1,0 +1,560 @@
+﻿@{
+    Layout = null;
+}
+<!doctype html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <link rel="icon" href="~/logo.ico">
+    <link rel="shortcut icon" href="~/logo.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/css/bootstrap.min.css">
+
+    @if (ViewBag.isFound == "true")
+    {
+
+        <meta name="title" content="@ViewBag.name | @ViewBag.profession | Fone Me">
+        <meta name="description" content="Join The Fone Me Community & stay connected with @ViewBag.name. @ViewBag.aboutme">
+        <meta name="keywords" content="@ViewBag.profession, @ViewBag.address,  professionals, freelancers, fone me, service providers, stay connected, freelancing websites service, professional connections, freelancing jobs">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="English">
+
+
+        <meta property="og:title" content="@ViewBag.name|@ViewBag.profession | Fone Me">
+        <meta property="og:site_name" content="Fone Me">
+        <meta property="og:url" content="@ViewBag.foneme">
+        <meta property="og:description" content="Join The Fone Me Community & stay connected with @ViewBag.name. @ViewBag.aboutme">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="https://fone.me/Assets/img/LOGO%201-02-05-01.jpg">
+
+
+        <meta name="twitter:card" content="app">
+        <meta name="twitter:site" content="Person's Twitter URL">
+        <meta name="twitter:description" content="Join The Fone Me Community & stay connected with @ViewBag.name. @ViewBag.aboutme">
+        <meta name="twitter:app:name:iphone" content="Fone Me">
+        <meta name="twitter:app:id:iphone" content="">
+        <meta name="twitter:app:name:ipad" content="Fone Me">
+        <meta name="twitter:app:id:ipad" content="">
+        <meta name="twitter:app:name:googleplay" content="Fone Me">
+        <meta name="twitter:app:id:googleplay" content="">
+        <meta name="twitter:app:country" content="USA">
+    }
+    else
+    {
+        <meta name="title" content="Professionals & Freelancers | Virtual Service Providers | Fone Me">
+        <meta name="description" content="The FoneMe messenger app is a community of freelancers, professionals and virtual service providers.  Join The Fone Me Community & stay connected. ">
+        <meta name="keywords" content="professionals, freelancers, fone me, service providers, stay connected, freelancing websites service, professional connections, freelancing jobs, accountancy, accountant, mobile application developer, app developer">
+        <meta name="robots" content="index, follow">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+        <meta name="language" content="English">
+
+
+        <meta property="og:title" content="Professionals & Freelancers | Virtual Service Providers | Fone Me">
+        <meta property="og:site_name" content="Fone Me">
+        <meta property="og:url" content="https://fone.me">
+        <meta property="og:description" content="The Fone Me messenger app is a community of freelancers, professionals and virtual service providers. Join The Fone Me Community & stay connected.">
+        <meta property="og:type" content="website">
+        <meta property="og:image" content="https://fone.me/Assets/img/LOGO%201-02-05-01.jpg">
+
+
+        <meta name="twitter:card" content="app">
+        <meta name="twitter:site" content="FoneMeApp">
+        <meta name="twitter:description" content="The Fone Me messenger app is a community of freelancers, professionals and virtual service providers. Join The Fone Me Community & stay connected.">
+        <meta name="twitter:app:name:iphone" content="Fone Me">
+        <meta name="twitter:app:id:iphone" content="">
+        <meta name="twitter:app:name:ipad" content="Fone Me">
+        <meta name="twitter:app:id:ipad" content="">
+        <meta name="twitter:app:name:googleplay" content="Fone Me">
+        <meta name="twitter:app:id:googleplay" content="">
+        <meta name="twitter:app:country" content="USA">
+    }
+
+
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css">
+
+    <!-- google fonts -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;400;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- select 2 -->
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/css/select2.min.css" rel="stylesheet" />
+
+    <!-- style css -->
+    <link rel="stylesheet" href="~/Assets/style/style.css">
+    <title>FoneMe</title>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-F6CX110B70"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-F6CX110B70');
+
+/**/</script>
+    <script type="application/ld+json">
+        {
+        "@@context": "https://schema.org",
+        "@@type": "Product",
+        "name": "Fone Me",
+        "image": "https://fone.me/Assets/img/LOGO%201-02-05-01.jpg",
+        "description": "The Fone Me messenger app is a community of freelancers, professionals and virtual service providers. Join The Fone Me Community & stay connected.",
+        "brand": "FoneMe",
+        "sku": "1000000000",
+        "gtin14": "",
+        "offers": {
+        "@@type": "AggregateOffer",
+        "url": "https://fone.me",
+        "priceCurrency": "USD",
+        "lowPrice": "",
+        "highPrice": "",
+        "offerCount": "1"
+        },
+        "aggregateRating": {
+        "@@type": "AggregateRating",
+        "ratingValue": "9.6",
+        "bestRating": "10",
+        "worstRating": "8.9",
+        "ratingCount": "1101342",
+        "reviewCount": "1292782"
+        },
+        "review": {
+        "@@type": "Review",
+        "name": "James Baskey",
+        "reviewBody": "Fone Me has made my skills more discoverable, desirable, easier to manage and more likely to convert.",
+        "reviewRating": {
+        "@@type": "Rating",
+        "ratingValue": "9.6",
+        "bestRating": "10",
+        "worstRating": "8.9"
+        },
+
+        "review": {
+        "@@type": "Review",
+        "name": "Charles Hanton",
+        "reviewBody": "Today, with over 9.5 million users worldwide, they're helping artists, accountants, brands, authors, agencies and influencers control their online presence. As the internet has become more fragmented, they are growing their functionality to serve better and to streamline the content-sharing process.",
+        "reviewRating": {
+        "@@type": "Rating",
+        "ratingValue": "9.6",
+        "bestRating": "10",
+        "worstRating": "8.9"
+        },
+
+        "datePublished": "2021-04-30",
+        "author": {"@@type": "Person", "name": "SS"},
+        "publisher": {"@@type": "Organization", "name": "SS"}
+        }
+        }
+        }
+    </script>
+
+</head>
+<body>
+
+
+    <!-- navbar -->
+    <section class="header">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light bg-white">
+                <div class="container-fluid">
+                    <a class="navbar-brand" href="https://fone.me/">
+                        <img src="~/Assets/img/LOGO 1-02-05-01.jpg" class="img-fluid" alt="">
+
+                    </a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark mx-2" href="https://www.foneme.org/privacy">Privacy</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark mx-2" href="https://www.foneme.org/About">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark mx-2" href="https://www.foneme.org/blog">Blog</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <!-- navbar -->
+
+    @if (ViewBag.isFound == "true")
+    {
+
+        <!-- content -->
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src=@ViewBag.ImageURL class="img-fluid rounded-circle dp" alt="" />
+                        <h3 class="font-weight-400 mt-2 mb-0">@ViewBag.name</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <p class="text-muted">
+                                            @ViewBag.profession
+                                        </p>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <!-- <p class=" font-12 font-weight-bold">4.7
+                                            <i class="fa fa-star text-warning"></i>
+                                        </p> -->
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <p>
+                            @ViewBag.aboutme
+                        </p>
+
+                        <hr />
+                        <div class="row my-2">
+                            <div class="col-1">
+                                <i class="fa fa-globe"></i>
+                            </div>
+                            <div class="col-11">
+                                <a href="" class="pl-3 text-decoration-none">
+                                    @ViewBag.foneme
+                                </a>
+                            </div>
+                        </div>
+                        <div class="row my-2">
+                            <div class="col-1">
+                                <i class="fa fa-map-marker-alt"></i>
+                            </div>
+                            <div class="col-11">
+                                <p>  @ViewBag.address</p>
+                            </div>
+                        </div>
+
+                        @Html.ActionLink("Send Message", "ContactUser", "Home", new { id = ViewBag.UserId }, new { @class = "btn btn-primary py-3 px-5 text-decoration-none mt-3" })
+                        @*<a href="send-message.html"
+                               class="btn btn-primary py-3 px-5 text-decoration-none mt-3">
+                                Send Message
+                            </a>*@
+
+                    </div>
+                    <div class="col-md-1"></div>
+                    <div class="col-md-6 m-auto">
+
+                        @{
+
+
+                            if (ViewBag.links != null)
+                            {
+                                if (ViewBag.links.Count != 0)
+                                {
+                                    foreach (var item in ViewBag.links)
+                                    {
+                                        <div class="links">
+
+                                            @if (item.Name == "Facebook")
+                                            {
+                                                <a href="@item.SocialLink" class="text-decoration-none position-relative my-3">
+                                                    <div class="fb-holder d-inline-flex">
+                                                        <img src="~/Assets/img/Vector.png" class="img-fluid" alt="" />
+                                                    </div>
+                                                    <span class="ms-4 text-white">@item.Name</span>
+                                                    <i class="text-white fa fa-angle-right"> </i>
+                                                </a>
+                                            }
+
+                                            else if (item.Name == "Youtube")
+                                            {
+                                                <a href="@item.SocialLink" class="text-decoration-none position-relative my-3">
+                                                    <div class="fb-holder d-inline-flex">
+                                                        <i class="fab fa-youtube text-danger"></i>
+                                                    </div>
+                                                    <span class="ms-4 text-white">@item.Name</span>
+                                                    <i class="text-white fa fa-angle-right"> </i>
+                                                </a>
+                                            }
+                                            else if (item.Name == "Fiverr")
+                                            {
+                                                <a href="@item.SocialLink" class="text-decoration-none position-relative my-3">
+                                                    <div class="fb-holder d-inline-flex">
+                                                        <img src="~/Assets/img/fiverr.png" class="img-fluid" alt="" />
+                                                    </div>
+                                                    <span class="ms-4 text-white">@item.Name</span>
+                                                    <i class="text-white fa fa-angle-right"> </i>
+                                                </a>
+                                            }
+                                            else if (item.Name == "Instagram")
+                                            {
+                                                <a href="@item.SocialLink" class="text-decoration-none position-relative my-3">
+                                                    <div class="fb-holder d-inline-flex">
+                                                        <img src="~/Assets/img/insta.png" class="img-fluid fb" alt="" />
+                                                    </div>
+                                                    <span class="ms-4 text-white">@item.Name</span>
+                                                    <i class="text-white fa fa-angle-right"> </i>
+                                                </a>
+                                            }
+                                            else if (item.Name == "Behance")
+                                            {
+                                                <a href="@item.SocialLink" class="text-decoration-none position-relative my-3">
+                                                    <div class="fb-holder d-inline-flex">
+                                                        <img src="~/Assets/img/behance.png" class="img-fluid fb" alt="" />
+                                                    </div>
+                                                    <span class="ms-4 text-white">@item.Name</span>
+                                                    <i class="text-white fa fa-angle-right"> </i>
+                                                </a>
+                                            }
+                                            else
+                                            {
+                                                <a href="@item.SocialLink" class="text-decoration-none position-relative my-3">
+                                                    <div class="fb-holder d-inline-flex">
+                                                        <img src="~/Assets/img/Rectangle 322.png" class="img-fluid fb" alt="" />
+                                                    </div>
+                                                    <span class="ms-4 text-white">@item.Name</span>
+                                                    <i class="text-white fa fa-angle-right"> </i>
+                                                </a>
+                                            }
+
+                                        </div>
+                                    }
+                                }
+                                else
+                                {
+
+                                    <!-- missing links -->
+                                    <div class="alert alert-secondary link-alert text-center">
+                                        <h5 class="m-1">No links found, check back soon!</h5>
+                                    </div>
+                                }
+                            }
+                            else
+                            {
+                                <!-- missing links -->
+                                <div class="alert alert-secondary link-alert text-center">
+                                    <h5 class="m-1">No links found, check back soon!</h5>
+                                </div>
+                                <!-- missing links -->
+
+                            }
+                        }
+
+
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- content -->
+
+
+
+
+    }
+    else if (ViewBag.isFound == "false")
+    {
+        <section class="content">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-5">
+                        <img src="~/Assets/img/profile-img.png" class="img-fluid dp" alt="">
+                        <h3 class="font-weight-400 mt-2 mb-0 danger">No Fone ID Exist!!</h3>
+
+                    </div>
+                    <div class="col-md-6 mt-auto">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/1.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/2.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/3.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/4.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/5.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/6.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/7.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2">
+                                <div class="card">
+                                    <img src="~/Assets/img/8.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-12 my-2 mx-0 px-2 lastImg">
+                                <div class="card">
+                                    <img src="~/Assets/img/9.png" class="card-img-top img-fluid" alt="">
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+            </div>
+        </section>
+
+
+    }
+    else
+    {
+        <!-- hero -->
+        <section class="hero">
+            <div class="row">
+                <div class="col-md-1"></div>
+                <div class="col-md-6 m-auto">
+                    <h1 class="text-white mb-5">
+                        Find and Message <i>Freelancers</i>
+                        and Virtual Professionals
+                    </h1>
+                    <!-- Dropdown -->
+                    @using (Html.BeginForm("Freelancers", "Home", null, FormMethod.Get, new { @class = "input-group bg-white rounded-pill" }))
+                    {
+                       
+
+                        <input type="text" placeholder="Try “Mobile App Developer&quot;" class="form-control rounded-pill border-0" name="searchValue" id="" required>
+                        <button class="btn" type="submit">
+                            <!-- <img src="img/Vector.png" class="img-fluid" alt=""> -->
+                            <i class="fa fa-search text-muted"></i>
+                        </button>
+
+
+                    }
+
+
+
+                    <p class="mt-3 text-white">Web & Mobile Design, Accountant, Therapist, Designer, Legal</p>
+                </div>
+                <div class="col-md-5">
+                    <img src="~/Assets/img/Mask Group.png" class="img-fluid" alt="">
+                </div>
+            </div>
+        </section>
+        <!-- hero -->
+
+        <!-- profiles section -->
+        <section class="profiles pb-5" id="userData">
+            <div class="container">
+                <div class="row">
+                    @foreach (var item in ViewBag.data)
+                    {
+                        <div class="col-xl-3 col-lg-4 col-md-6 col-sm-6 p-3">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="text-center">
+
+                                        @{
+                                            item.FoneMe = "https://fone.me/" + @item.FoneMe;
+                                        }
+                                        <img src=@item.ImageURL class="w-50 mb-3" alt="">
+                                        <h4>@item.FirstName &nbsp; @item.LastName</h4>
+                                        <p>@item.Profession</p>
+                                        <button class="btn btn-primary mt-3" onclick="window.location.href='@item.FoneMe'">CONNECT</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
+        </section>
+        <!-- profiles -->
+
+
+    }
+
+    <!-- download section -->
+    <section class="download">
+        <div class="container">
+            <div class="text-center">
+                <h3 class="text-primary mb-4">
+                    <span class="fw-bold">Stay Connected.</span>
+                    Join the FoneMe Community.
+                </h3>
+                <p>Claim your own personalized Fone.Me Link</p>
+                <a href="https://play.google.com/store/apps/details?id=com.fone.me" class="text-decoration-none">
+                    <img src="~/Assets/img/playstore.png" class="w-25 pl" alt="">
+                </a>
+                <a href="https://apps.apple.com/us/app/fone-call-anyone-anywhere/id1496675612?ls=1" class="text-decoration-none">
+                    <img src="~/Assets/img/appstore.png" class="w-25 pl" alt="">
+                </a>
+            </div>
+        </div>
+    </section>
+    <!-- download section -->
+    <!-- content -->
+    <!-- jQuery -->
+    <script src="~/Assets/jquery/jquery.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.5.4/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.0-beta1/js/bootstrap.min.js"></script>
+
+    <!-- Select2 JS -->
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-beta.1/dist/js/select2.min.js"></script>
+
+    @*<script src="~/Assets/scripts/script.js"></script>*@
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            var n = window.location.href.lastIndexOf("/") + 1;
+            var m = window.location.href.length;
+            var x = window.location.href.substring(n, m);
+
+            if (navigator.userAgent.match(/Android/i)
+                || navigator.userAgent.match(/webOS/i)
+                || navigator.userAgent.match(/iPhone/i)
+                || navigator.userAgent.match(/iPad/i)
+                || navigator.userAgent.match(/iPod/i)
+                || navigator.userAgent.match(/BlackBerry/i)
+                || navigator.userAgent.match(/Windows Phone/i)) {
+                //alert("You're using Mobile Device!!");
+                //alert("You're using Mobile Device!!" + x);
+                if (x == "") {
+                    //console.log("EM: "+x);
+                } else {
+                    if (x == "AboutMe" || x == "Freelancers") {
+                        if (x == "Freelancers") {
+                            document.getElementById('userData').scrollIntoView();
+                        }
+                    }
+                    else {
+                        window.location.replace("https://foneme.app.link/aoJE0cwEK5?ID=" + x);
+                    }
+                }
+            }
+
+        });
+    </script>
+</body>
+</html>
+
+

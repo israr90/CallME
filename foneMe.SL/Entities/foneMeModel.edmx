@@ -1,0 +1,937 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="foneMeModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Audience">
+          <Key>
+            <PropertyRef Name="AudienceId" />
+          </Key>
+          <Property Name="AudienceId" Type="bigint" Nullable="false" />
+          <Property Name="ClientId" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Base64Secret" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="120" Nullable="false" />
+        </EntityType>
+        <EntityType Name="CallConnection">
+          <Key>
+            <PropertyRef Name="CallConnectionId" />
+          </Key>
+          <Property Name="CallConnectionId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DialerNumber" Type="nvarchar(max)" />
+          <Property Name="ReceiverNumber" Type="nvarchar(max)" />
+          <Property Name="StatusProfileId" Type="bigint" />
+          <Property Name="ChannelName" Type="nvarchar" MaxLength="100" />
+          <Property Name="CallType" Type="nvarchar" MaxLength="50" />
+          <Property Name="AppType" Type="nvarchar" MaxLength="50" />
+          <Property Name="CallDate" Type="datetime" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="DialerUserId" Type="uniqueidentifier" />
+          <Property Name="ReceiverUserId" Type="uniqueidentifier" />
+          <Property Name="ReceiverStatusProfileId" Type="bigint" />
+          <Property Name="CallNotificationProfileId" Type="bigint" />
+          <Property Name="CallEndTime" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="ClaimId" />
+          </Key>
+          <Property Name="ClaimId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="ClaimType" Type="nvarchar(max)" />
+          <Property Name="ClaimValue" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Contacts">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" />
+          <Property Name="AreaId" Type="bigint" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="ContactCategoryProfileId" Type="bigint" />
+          <Property Name="ContactTypeProfileId" Type="bigint" />
+          <Property Name="IsPrimary" Type="bit" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="CountryCode" Type="nvarchar(max)" />
+          <Property Name="NumberWithOutCode" Type="nvarchar(max)" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'Foneme2020.dbo.ExternalLogin' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="ExternalLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="ProviderKey" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+        </EntityType>
+        <EntityType Name="LocalContact">
+          <Key>
+            <PropertyRef Name="LocalContactsId" />
+          </Key>
+          <Property Name="LocalContactsId" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="LocalContactUserId" Type="uniqueidentifier" />
+          <Property Name="HaveContactsUserId" Type="uniqueidentifier" />
+        </EntityType>
+        <EntityType Name="Profiles">
+          <Key>
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="ProfileId" Type="bigint" Nullable="false" />
+          <Property Name="ProfileTypeId" Type="int" />
+          <Property Name="Name" Type="nvarchar(max)" />
+          <Property Name="ShortName" Type="nvarchar(max)" />
+          <Property Name="Description" Type="nvarchar(max)" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProfileType">
+          <Key>
+            <PropertyRef Name="ProfileTypeId" />
+          </Key>
+          <Property Name="ProfileTypeId" Type="int" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="150" Nullable="false" />
+          <Property Name="ShortName" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="ProjectFiles">
+          <Key>
+            <PropertyRef Name="ProjectFileId" />
+          </Key>
+          <Property Name="ProjectFileId" Type="bigint" Nullable="false" />
+          <Property Name="PathProfileId" Type="bigint" />
+          <Property Name="FileName" Type="nvarchar(max)" />
+          <Property Name="FileTypeProfileId" Type="bigint" />
+          <Property Name="FileSize" Type="bigint" />
+          <Property Name="IsActive" Type="bit" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="AddedDate" Type="datetime" />
+          <Property Name="BrandLocationId" Type="bigint" />
+          <Property Name="ProductId" Type="bigint" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="IsDeleted" Type="bit" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="UserRole">
+          <Key>
+            <PropertyRef Name="UserId" />
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="RoleId" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Users">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FirstName" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="LastName" Type="nvarchar" MaxLength="50" />
+          <Property Name="FullName" Type="nvarchar" MaxLength="100" />
+          <Property Name="FatherName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="20" />
+          <Property Name="Title" Type="nvarchar" MaxLength="10" />
+          <Property Name="CNIC" Type="nvarchar" MaxLength="20" />
+          <Property Name="DateofBirth" Type="datetime" />
+          <Property Name="ImageURL" Type="nvarchar(max)" />
+          <Property Name="MaritalStatus" Type="nvarchar" MaxLength="10" />
+          <Property Name="AreaId" Type="bigint" />
+          <Property Name="LoginName" Type="nvarchar" MaxLength="256" Nullable="false" />
+          <Property Name="EmailConfirmed" Type="bit" />
+          <Property Name="PasswordHash" Type="nvarchar(max)" />
+          <Property Name="SecurityStamp" Type="nvarchar(max)" />
+          <Property Name="CreatedAt" Type="datetime" />
+          <Property Name="CreatedBy" Type="nvarchar" MaxLength="200" />
+          <Property Name="ModifiedAt" Type="datetime" />
+          <Property Name="ModifiedBy" Type="nvarchar" MaxLength="100" />
+          <Property Name="LockOutEnabled" Type="bit" />
+          <Property Name="LockOutEndDateUTC" Type="datetime" />
+          <Property Name="BrandLocationId" Type="bigint" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="IsUserVerified" Type="bit" />
+          <Property Name="DeviceToken" Type="nvarchar(max)" />
+          <Property Name="ImageBytes" Type="varbinary(max)" />
+          <Property Name="Address" Type="varchar" MaxLength="255" />
+          <Property Name="VoipToken" Type="nvarchar(max)" />
+        </EntityType>
+        <Association Name="FK_Claim_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="Claim" Type="Self.Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Contacts" Type="Self.Contacts" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Contacts">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalContact_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="LocalContact" Type="Self.LocalContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LocalContact">
+              <PropertyRef Name="LocalContactUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalContact_Users1">
+          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="LocalContact" Type="Self.LocalContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LocalContact">
+              <PropertyRef Name="HaveContactsUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profiles_ProfileType">
+          <End Role="ProfileType" Type="Self.ProfileType" Multiplicity="0..1" />
+          <End Role="Profiles" Type="Self.Profiles" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileType">
+              <PropertyRef Name="ProfileTypeId" />
+            </Principal>
+            <Dependent Role="Profiles">
+              <PropertyRef Name="ProfileTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Role">
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Role">
+              <PropertyRef Name="RoleId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="RoleId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_UserRole_Users">
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
+          <End Role="UserRole" Type="Self.UserRole" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Users">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="UserRole">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="foneMeModelStoreContainer">
+          <EntitySet Name="Audience" EntityType="Self.Audience" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CallConnection" EntityType="Self.CallConnection" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Claim" EntityType="Self.Claim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Contacts" EntityType="Self.Contacts" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="LocalContact" EntityType="Self.LocalContact" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Profiles" EntityType="Self.Profiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProfileType" EntityType="Self.ProfileType" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ProjectFiles" EntityType="Self.ProjectFiles" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserRole" EntityType="Self.UserRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ExternalLogin" EntityType="Self.ExternalLogin" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ExternalLogin].[LoginProvider] AS [LoginProvider], 
+    [ExternalLogin].[ProviderKey] AS [ProviderKey], 
+    [ExternalLogin].[UserId] AS [UserId]
+    FROM [dbo].[ExternalLogin] AS [ExternalLogin]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Claim_Users" Association="Self.FK_Claim_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Claim" EntitySet="Claim" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacts_Users" Association="Self.FK_Contacts_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="Contacts" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalContact_Users" Association="Self.FK_LocalContact_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LocalContact" EntitySet="LocalContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalContact_Users1" Association="Self.FK_LocalContact_Users1">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="LocalContact" EntitySet="LocalContact" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profiles_ProfileType" Association="Self.FK_Profiles_ProfileType">
+            <End Role="ProfileType" EntitySet="ProfileType" />
+            <End Role="Profiles" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Role" Association="Self.FK_UserRole_Role">
+            <End Role="Role" EntitySet="Role" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+          <AssociationSet Name="FK_UserRole_Users" Association="Self.FK_UserRole_Users">
+            <End Role="Users" EntitySet="Users" />
+            <End Role="UserRole" EntitySet="UserRole" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="foneMeModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="foneMeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Audiences" EntityType="foneMeModel.Audience" />
+          <EntitySet Name="CallConnections" EntityType="foneMeModel.CallConnection" />
+          <EntitySet Name="Claims" EntityType="foneMeModel.Claim" />
+          <EntitySet Name="Contacts" EntityType="foneMeModel.Contact" />
+          <EntitySet Name="ExternalLogins" EntityType="foneMeModel.ExternalLogin" />
+          <EntitySet Name="LocalContacts" EntityType="foneMeModel.LocalContact" />
+          <EntitySet Name="Profiles" EntityType="foneMeModel.Profile" />
+          <EntitySet Name="ProfileTypes" EntityType="foneMeModel.ProfileType" />
+          <EntitySet Name="ProjectFiles" EntityType="foneMeModel.ProjectFile" />
+          <EntitySet Name="Roles" EntityType="foneMeModel.Role" />
+          <EntitySet Name="Users" EntityType="foneMeModel.User" />
+          <AssociationSet Name="FK_CallConnection_Profiles" Association="foneMeModel.FK_CallConnection_Profiles">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="CallConnection" EntitySet="CallConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallConnection_Profiles1" Association="foneMeModel.FK_CallConnection_Profiles1">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="CallConnection" EntitySet="CallConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallConnection_Profiles2" Association="foneMeModel.FK_CallConnection_Profiles2">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="CallConnection" EntitySet="CallConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallConnection_Users" Association="foneMeModel.FK_CallConnection_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CallConnection" EntitySet="CallConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_CallConnection_Users1" Association="foneMeModel.FK_CallConnection_Users1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="CallConnection" EntitySet="CallConnections" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Claim_Users" Association="foneMeModel.FK_Claim_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Claim" EntitySet="Claims" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacts_Profiles" Association="foneMeModel.FK_Contacts_Profiles">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacts_Profiles1" Association="foneMeModel.FK_Contacts_Profiles1">
+            <End Role="Profile" EntitySet="Profiles" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Contacts_Users" Association="foneMeModel.FK_Contacts_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="Contact" EntitySet="Contacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ExternalLogin_Users" Association="foneMeModel.FK_ExternalLogin_Users">
+            <End Role="User" EntitySet="Users" />
+            <End Role="ExternalLogin" EntitySet="ExternalLogins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalContact_Users1" Association="foneMeModel.FK_LocalContact_Users1">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LocalContact" EntitySet="LocalContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_LocalContact_Users2" Association="foneMeModel.FK_LocalContact_Users2">
+            <End Role="User" EntitySet="Users" />
+            <End Role="LocalContact" EntitySet="LocalContacts" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Profile_ProfileType" Association="foneMeModel.FK_Profile_ProfileType">
+            <End Role="ProfileType" EntitySet="ProfileTypes" />
+            <End Role="Profile" EntitySet="Profiles" />
+          </AssociationSet>
+          <AssociationSet Name="UserRole" Association="foneMeModel.UserRole">
+            <End Role="Role" EntitySet="Roles" />
+            <End Role="User" EntitySet="Users" />
+          </AssociationSet>
+          <EntitySet Name="sysdiagrams" EntityType="foneMeModel.sysdiagram" />
+        </EntityContainer>
+        <EntityType Name="Audience">
+          <Key>
+            <PropertyRef Name="AudienceId" />
+          </Key>
+          <Property Name="AudienceId" Type="Int64" Nullable="false" />
+          <Property Name="ClientId" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Base64Secret" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="120" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="CallConnection">
+          <Key>
+            <PropertyRef Name="CallConnectionId" />
+          </Key>
+          <Property Name="CallConnectionId" Type="Int64" Nullable="false" />
+          <Property Name="DialerNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ReceiverNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="StatusProfileId" Type="Int64" />
+          <Property Name="ChannelName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="CallType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="AppType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CallDate" Type="DateTime" Precision="3" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="DialerUserId" Type="Guid" />
+          <Property Name="ReceiverUserId" Type="Guid" />
+          <Property Name="ReceiverStatusProfileId" Type="Int64" />
+          <Property Name="CallNotificationProfileId" Type="Int64" />
+          <Property Name="CallEndTime" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="Profile" Relationship="foneMeModel.FK_CallConnection_Profiles" FromRole="CallConnection" ToRole="Profile" />
+          <NavigationProperty Name="Profile1" Relationship="foneMeModel.FK_CallConnection_Profiles1" FromRole="CallConnection" ToRole="Profile" />
+          <NavigationProperty Name="Profile2" Relationship="foneMeModel.FK_CallConnection_Profiles2" FromRole="CallConnection" ToRole="Profile" />
+          <NavigationProperty Name="User" Relationship="foneMeModel.FK_CallConnection_Users" FromRole="CallConnection" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="foneMeModel.FK_CallConnection_Users1" FromRole="CallConnection" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Claim">
+          <Key>
+            <PropertyRef Name="ClaimId" />
+          </Key>
+          <Property Name="ClaimId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="ClaimType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ClaimValue" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="User" Relationship="foneMeModel.FK_Claim_Users" FromRole="Claim" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Contact">
+          <Key>
+            <PropertyRef Name="ContactId" />
+          </Key>
+          <Property Name="ContactId" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="UserId" Type="Guid" />
+          <Property Name="AreaId" Type="Int64" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactCategoryProfileId" Type="Int64" />
+          <Property Name="ContactTypeProfileId" Type="Int64" />
+          <Property Name="IsPrimary" Type="Boolean" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="CountryCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="NumberWithOutCode" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Profile" Relationship="foneMeModel.FK_Contacts_Profiles" FromRole="Contact" ToRole="Profile" />
+          <NavigationProperty Name="Profile1" Relationship="foneMeModel.FK_Contacts_Profiles1" FromRole="Contact" ToRole="Profile" />
+          <NavigationProperty Name="User" Relationship="foneMeModel.FK_Contacts_Users" FromRole="Contact" ToRole="User" />
+        </EntityType>
+        <EntityType Name="ExternalLogin">
+          <Key>
+            <PropertyRef Name="LoginProvider" />
+            <PropertyRef Name="ProviderKey" />
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="LoginProvider" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="ProviderKey" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <NavigationProperty Name="User" Relationship="foneMeModel.FK_ExternalLogin_Users" FromRole="ExternalLogin" ToRole="User" />
+        </EntityType>
+        <EntityType Name="LocalContact">
+          <Key>
+            <PropertyRef Name="LocalContactsId" />
+          </Key>
+          <Property Name="LocalContactsId" Type="Int64" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="LocalContactUserId" Type="Guid" />
+          <Property Name="HaveContactsUserId" Type="Guid" />
+          <NavigationProperty Name="User" Relationship="foneMeModel.FK_LocalContact_Users1" FromRole="LocalContact" ToRole="User" />
+          <NavigationProperty Name="User1" Relationship="foneMeModel.FK_LocalContact_Users2" FromRole="LocalContact" ToRole="User" />
+        </EntityType>
+        <EntityType Name="Profile">
+          <Key>
+            <PropertyRef Name="ProfileId" />
+          </Key>
+          <Property Name="ProfileId" Type="Int64" Nullable="false" />
+          <Property Name="ProfileTypeId" Type="Int32" />
+          <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="CallConnections" Relationship="foneMeModel.FK_CallConnection_Profiles" FromRole="Profile" ToRole="CallConnection" />
+          <NavigationProperty Name="CallConnections1" Relationship="foneMeModel.FK_CallConnection_Profiles1" FromRole="Profile" ToRole="CallConnection" />
+          <NavigationProperty Name="CallConnections2" Relationship="foneMeModel.FK_CallConnection_Profiles2" FromRole="Profile" ToRole="CallConnection" />
+          <NavigationProperty Name="Contacts" Relationship="foneMeModel.FK_Contacts_Profiles" FromRole="Profile" ToRole="Contact" />
+          <NavigationProperty Name="Contacts1" Relationship="foneMeModel.FK_Contacts_Profiles1" FromRole="Profile" ToRole="Contact" />
+          <NavigationProperty Name="ProfileType" Relationship="foneMeModel.FK_Profile_ProfileType" FromRole="Profile" ToRole="ProfileType" />
+        </EntityType>
+        <EntityType Name="ProfileType">
+          <Key>
+            <PropertyRef Name="ProfileTypeId" />
+          </Key>
+          <Property Name="ProfileTypeId" Type="Int32" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="150" FixedLength="false" Unicode="true" />
+          <Property Name="ShortName" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Profiles" Relationship="foneMeModel.FK_Profile_ProfileType" FromRole="ProfileType" ToRole="Profile" />
+        </EntityType>
+        <EntityType Name="ProjectFile">
+          <Key>
+            <PropertyRef Name="ProjectFileId" />
+          </Key>
+          <Property Name="ProjectFileId" Type="Int64" Nullable="false" />
+          <Property Name="PathProfileId" Type="Int64" />
+          <Property Name="FileName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="FileTypeProfileId" Type="Int64" />
+          <Property Name="FileSize" Type="Int64" />
+          <Property Name="IsActive" Type="Boolean" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="AddedDate" Type="DateTime" Precision="3" />
+          <Property Name="BrandLocationId" Type="Int64" />
+          <Property Name="ProductId" Type="Int64" />
+        </EntityType>
+        <EntityType Name="Role">
+          <Key>
+            <PropertyRef Name="RoleId" />
+          </Key>
+          <Property Name="RoleId" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <NavigationProperty Name="Users" Relationship="foneMeModel.UserRole" FromRole="Role" ToRole="User" />
+        </EntityType>
+        <EntityType Name="User">
+          <Key>
+            <PropertyRef Name="UserId" />
+          </Key>
+          <Property Name="UserId" Type="Guid" Nullable="false" />
+          <Property Name="FirstName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="LastName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FullName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FatherName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Gender" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="Title" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CNIC" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="DateofBirth" Type="DateTime" Precision="3" />
+          <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="MaritalStatus" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="AreaId" Type="Int64" />
+          <Property Name="LoginName" Type="String" Nullable="false" MaxLength="256" FixedLength="false" Unicode="true" />
+          <Property Name="EmailConfirmed" Type="Boolean" />
+          <Property Name="PasswordHash" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SecurityStamp" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CreatedAt" Type="DateTime" Precision="3" />
+          <Property Name="CreatedBy" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="ModifiedAt" Type="DateTime" Precision="3" />
+          <Property Name="ModifiedBy" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LockOutEnabled" Type="Boolean" />
+          <Property Name="LockOutEndDateUTC" Type="DateTime" Precision="3" />
+          <Property Name="BrandLocationId" Type="Int64" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="IsUserVerified" Type="Boolean" />
+          <Property Name="DeviceToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ImageBytes" Type="Binary" MaxLength="Max" FixedLength="false" />
+          <NavigationProperty Name="CallConnections" Relationship="foneMeModel.FK_CallConnection_Users" FromRole="User" ToRole="CallConnection" />
+          <NavigationProperty Name="CallConnections1" Relationship="foneMeModel.FK_CallConnection_Users1" FromRole="User" ToRole="CallConnection" />
+          <NavigationProperty Name="Claims" Relationship="foneMeModel.FK_Claim_Users" FromRole="User" ToRole="Claim" />
+          <NavigationProperty Name="Contacts" Relationship="foneMeModel.FK_Contacts_Users" FromRole="User" ToRole="Contact" />
+          <NavigationProperty Name="ExternalLogins" Relationship="foneMeModel.FK_ExternalLogin_Users" FromRole="User" ToRole="ExternalLogin" />
+          <NavigationProperty Name="LocalContacts" Relationship="foneMeModel.FK_LocalContact_Users1" FromRole="User" ToRole="LocalContact" />
+          <NavigationProperty Name="LocalContacts1" Relationship="foneMeModel.FK_LocalContact_Users2" FromRole="User" ToRole="LocalContact" />
+          <NavigationProperty Name="Roles" Relationship="foneMeModel.UserRole" FromRole="User" ToRole="Role" />
+          <Property Name="Address" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="VoipToken" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_CallConnection_Profiles">
+          <End Type="foneMeModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="foneMeModel.CallConnection" Role="CallConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="CallConnection">
+              <PropertyRef Name="StatusProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallConnection_Profiles1">
+          <End Type="foneMeModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="foneMeModel.CallConnection" Role="CallConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="CallConnection">
+              <PropertyRef Name="ReceiverStatusProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallConnection_Profiles2">
+          <End Type="foneMeModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="foneMeModel.CallConnection" Role="CallConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="CallConnection">
+              <PropertyRef Name="CallNotificationProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallConnection_Users">
+          <End Type="foneMeModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="foneMeModel.CallConnection" Role="CallConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CallConnection">
+              <PropertyRef Name="DialerUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_CallConnection_Users1">
+          <End Type="foneMeModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="foneMeModel.CallConnection" Role="CallConnection" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="CallConnection">
+              <PropertyRef Name="ReceiverUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Claim_Users">
+          <End Type="foneMeModel.User" Role="User" Multiplicity="1" />
+          <End Type="foneMeModel.Claim" Role="Claim" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Claim">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_Profiles">
+          <End Type="foneMeModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="foneMeModel.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ContactTypeProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_Profiles1">
+          <End Type="foneMeModel.Profile" Role="Profile" Multiplicity="0..1" />
+          <End Type="foneMeModel.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Profile">
+              <PropertyRef Name="ProfileId" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="ContactCategoryProfileId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Contacts_Users">
+          <End Type="foneMeModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="foneMeModel.Contact" Role="Contact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="Contact">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ExternalLogin_Users">
+          <End Type="foneMeModel.User" Role="User" Multiplicity="1" />
+          <End Type="foneMeModel.ExternalLogin" Role="ExternalLogin" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="ExternalLogin">
+              <PropertyRef Name="UserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalContact_Users1">
+          <End Type="foneMeModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="foneMeModel.LocalContact" Role="LocalContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LocalContact">
+              <PropertyRef Name="HaveContactsUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_LocalContact_Users2">
+          <End Type="foneMeModel.User" Role="User" Multiplicity="0..1" />
+          <End Type="foneMeModel.LocalContact" Role="LocalContact" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="User">
+              <PropertyRef Name="UserId" />
+            </Principal>
+            <Dependent Role="LocalContact">
+              <PropertyRef Name="LocalContactUserId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Profile_ProfileType">
+          <End Type="foneMeModel.ProfileType" Role="ProfileType" Multiplicity="0..1" />
+          <End Type="foneMeModel.Profile" Role="Profile" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ProfileType">
+              <PropertyRef Name="ProfileTypeId" />
+            </Principal>
+            <Dependent Role="Profile">
+              <PropertyRef Name="ProfileTypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="UserRole">
+          <End Type="foneMeModel.Role" Role="Role" Multiplicity="*" />
+          <End Type="foneMeModel.User" Role="User" Multiplicity="*" />
+        </Association>
+        <EntityType Name="sysdiagram">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="foneMeModelStoreContainer" CdmEntityContainer="foneMeEntities">
+          <EntitySetMapping Name="Audiences">
+            <EntityTypeMapping TypeName="foneMeModel.Audience">
+              <MappingFragment StoreEntitySet="Audience">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Base64Secret" ColumnName="Base64Secret" />
+                <ScalarProperty Name="ClientId" ColumnName="ClientId" />
+                <ScalarProperty Name="AudienceId" ColumnName="AudienceId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CallConnections">
+            <EntityTypeMapping TypeName="foneMeModel.CallConnection">
+              <MappingFragment StoreEntitySet="CallConnection">
+                <ScalarProperty Name="CallEndTime" ColumnName="CallEndTime" />
+                <ScalarProperty Name="CallNotificationProfileId" ColumnName="CallNotificationProfileId" />
+                <ScalarProperty Name="ReceiverStatusProfileId" ColumnName="ReceiverStatusProfileId" />
+                <ScalarProperty Name="ReceiverUserId" ColumnName="ReceiverUserId" />
+                <ScalarProperty Name="DialerUserId" ColumnName="DialerUserId" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="CallDate" ColumnName="CallDate" />
+                <ScalarProperty Name="AppType" ColumnName="AppType" />
+                <ScalarProperty Name="CallType" ColumnName="CallType" />
+                <ScalarProperty Name="ChannelName" ColumnName="ChannelName" />
+                <ScalarProperty Name="StatusProfileId" ColumnName="StatusProfileId" />
+                <ScalarProperty Name="ReceiverNumber" ColumnName="ReceiverNumber" />
+                <ScalarProperty Name="DialerNumber" ColumnName="DialerNumber" />
+                <ScalarProperty Name="CallConnectionId" ColumnName="CallConnectionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Claims">
+            <EntityTypeMapping TypeName="foneMeModel.Claim">
+              <MappingFragment StoreEntitySet="Claim">
+                <ScalarProperty Name="ClaimValue" ColumnName="ClaimValue" />
+                <ScalarProperty Name="ClaimType" ColumnName="ClaimType" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ClaimId" ColumnName="ClaimId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Contacts">
+            <EntityTypeMapping TypeName="foneMeModel.Contact">
+              <MappingFragment StoreEntitySet="Contacts">
+                <ScalarProperty Name="NumberWithOutCode" ColumnName="NumberWithOutCode" />
+                <ScalarProperty Name="CountryCode" ColumnName="CountryCode" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="IsPrimary" ColumnName="IsPrimary" />
+                <ScalarProperty Name="ContactTypeProfileId" ColumnName="ContactTypeProfileId" />
+                <ScalarProperty Name="ContactCategoryProfileId" ColumnName="ContactCategoryProfileId" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ContactId" ColumnName="ContactId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ExternalLogins">
+            <EntityTypeMapping TypeName="foneMeModel.ExternalLogin">
+              <MappingFragment StoreEntitySet="ExternalLogin">
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+                <ScalarProperty Name="ProviderKey" ColumnName="ProviderKey" />
+                <ScalarProperty Name="LoginProvider" ColumnName="LoginProvider" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="LocalContacts">
+            <EntityTypeMapping TypeName="foneMeModel.LocalContact">
+              <MappingFragment StoreEntitySet="LocalContact">
+                <ScalarProperty Name="HaveContactsUserId" ColumnName="HaveContactsUserId" />
+                <ScalarProperty Name="LocalContactUserId" ColumnName="LocalContactUserId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="LocalContactsId" ColumnName="LocalContactsId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Profiles">
+            <EntityTypeMapping TypeName="foneMeModel.Profile">
+              <MappingFragment StoreEntitySet="Profiles">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProfileTypeId" ColumnName="ProfileTypeId" />
+                <ScalarProperty Name="ProfileId" ColumnName="ProfileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProfileTypes">
+            <EntityTypeMapping TypeName="foneMeModel.ProfileType">
+              <MappingFragment StoreEntitySet="ProfileType">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="ShortName" ColumnName="ShortName" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ProfileTypeId" ColumnName="ProfileTypeId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ProjectFiles">
+            <EntityTypeMapping TypeName="foneMeModel.ProjectFile">
+              <MappingFragment StoreEntitySet="ProjectFiles">
+                <ScalarProperty Name="ProductId" ColumnName="ProductId" />
+                <ScalarProperty Name="BrandLocationId" ColumnName="BrandLocationId" />
+                <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+                <ScalarProperty Name="FileSize" ColumnName="FileSize" />
+                <ScalarProperty Name="FileTypeProfileId" ColumnName="FileTypeProfileId" />
+                <ScalarProperty Name="FileName" ColumnName="FileName" />
+                <ScalarProperty Name="PathProfileId" ColumnName="PathProfileId" />
+                <ScalarProperty Name="ProjectFileId" ColumnName="ProjectFileId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Roles">
+            <EntityTypeMapping TypeName="foneMeModel.Role">
+              <MappingFragment StoreEntitySet="Role">
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Users">
+            <EntityTypeMapping TypeName="foneMeModel.User">
+              <MappingFragment StoreEntitySet="Users">
+                <ScalarProperty Name="VoipToken" ColumnName="VoipToken" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="ImageBytes" ColumnName="ImageBytes" />
+                <ScalarProperty Name="DeviceToken" ColumnName="DeviceToken" />
+                <ScalarProperty Name="IsUserVerified" ColumnName="IsUserVerified" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="BrandLocationId" ColumnName="BrandLocationId" />
+                <ScalarProperty Name="LockOutEndDateUTC" ColumnName="LockOutEndDateUTC" />
+                <ScalarProperty Name="LockOutEnabled" ColumnName="LockOutEnabled" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedAt" ColumnName="ModifiedAt" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedAt" ColumnName="CreatedAt" />
+                <ScalarProperty Name="SecurityStamp" ColumnName="SecurityStamp" />
+                <ScalarProperty Name="PasswordHash" ColumnName="PasswordHash" />
+                <ScalarProperty Name="EmailConfirmed" ColumnName="EmailConfirmed" />
+                <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+                <ScalarProperty Name="AreaId" ColumnName="AreaId" />
+                <ScalarProperty Name="MaritalStatus" ColumnName="MaritalStatus" />
+                <ScalarProperty Name="ImageURL" ColumnName="ImageURL" />
+                <ScalarProperty Name="DateofBirth" ColumnName="DateofBirth" />
+                <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="FatherName" ColumnName="FatherName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="UserRole" TypeName="foneMeModel.UserRole" StoreEntitySet="UserRole">
+            <EndProperty Name="User">
+              <ScalarProperty Name="UserId" ColumnName="UserId" />
+            </EndProperty>
+            <EndProperty Name="Role">
+              <ScalarProperty Name="RoleId" ColumnName="RoleId" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="foneMeModel.sysdiagram">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="definition" ColumnName="definition" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="name" ColumnName="name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

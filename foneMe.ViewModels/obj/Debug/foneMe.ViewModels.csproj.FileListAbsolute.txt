@@ -1,0 +1,12 @@
+C:\inetpub\Upwork_Project\foneMe.ViewModels\bin\Debug\foneMe.ViewModels.dll.config
+C:\inetpub\Upwork_Project\foneMe.ViewModels\bin\Debug\foneMe.ViewModels.dll
+C:\inetpub\Upwork_Project\foneMe.ViewModels\bin\Debug\foneMe.ViewModels.pdb
+C:\inetpub\Upwork_Project\foneMe.ViewModels\bin\Debug\EntityFramework.dll
+C:\inetpub\Upwork_Project\foneMe.ViewModels\bin\Debug\EntityFramework.SqlServer.dll
+C:\inetpub\Upwork_Project\foneMe.ViewModels\bin\Debug\EntityFramework.xml
+C:\inetpub\Upwork_Project\foneMe.ViewModels\bin\Debug\EntityFramework.SqlServer.xml
+C:\inetpub\Upwork_Project\foneMe.ViewModels\obj\Debug\foneMe.ViewModels.csproj.AssemblyReference.cache
+C:\inetpub\Upwork_Project\foneMe.ViewModels\obj\Debug\foneMe.ViewModels.csproj.CoreCompileInputs.cache
+C:\inetpub\Upwork_Project\foneMe.ViewModels\obj\Debug\foneMe.ViewModels.csproj.CopyComplete
+C:\inetpub\Upwork_Project\foneMe.ViewModels\obj\Debug\foneMe.ViewModels.dll
+C:\inetpub\Upwork_Project\foneMe.ViewModels\obj\Debug\foneMe.ViewModels.pdb
